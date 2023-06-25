@@ -20,3 +20,4 @@ const RowText = props => {
 export default RowText;
 
 const styles = StyleSheet.create({});
+
