@@ -2,23 +2,27 @@ import React from 'react';
 import {ActivityIndicator, View, StyleSheet} from 'react-native'
 import {NavigationContainer} from '@react-navigation/native';
 import Tabs from './src/components/Tabs';
-import {useGetWeather} from './src/hooks/useGetWeather'
+import {useGetWeather} from './src/hooks/useGetWeather';
+import ErrorItem from './src/components/ErrorItem'
 const App = () => {
 const [loading, error, weather] = useGetWeather();
 
-console.log("loading",loading,"error",error,"weather",weather)
-if(loading){
+if(weather && weather.list){
   return(
-    <View style={styles.container}>
-      <ActivityIndicator size={'large'} color={'blue'} />
-    </View>
+    <NavigationContainer>
+    <Tabs weather={weather}/>
+    </NavigationContainer>
   )
 }
   //end for location
   return (
-    <NavigationContainer>
-     <Tabs />
-    </NavigationContainer>
+    <View style={styles.container}>
+      {
+        error ?  <ErrorItem />
+        :
+        <ActivityIndicator size={'large'} color={'blue'} /> 
+      }
+    </View>
   );
 };
 

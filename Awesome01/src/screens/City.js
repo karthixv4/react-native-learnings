@@ -8,20 +8,21 @@ import {
 } from 'react-native';
 import React from 'react';
 import IconText from '../components/IconText';
-
-const City = () => {
+import moment from 'moment';
+const City = ({weatherData}) => {
+  const {name, country, population, sunrise, sunset} = weatherData;
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
         style={styles.imageLayout}
         source={require('../../assets/city.jpg')}>
-        <Text style={[styles.city, styles.cityText]}>Chennai</Text>
-        <Text style={[styles.country, styles.cityText]}>India</Text>
+        <Text style={[styles.city, styles.cityText]}>{name}</Text>
+        <Text style={[styles.country, styles.cityText]}>{country}</Text>
         <View style={[styles.populationWrapper, styles.rowLayout]}>
           <IconText
             iconName={'user'}
             iconColor={'red'}
-            bodyText={'8000'}
+            bodyText={`Population: ${population}`}
             bodyTextStyle={styles.populationText}
           />
         </View>
@@ -29,13 +30,13 @@ const City = () => {
           <IconText
             iconName={'sunrise'}
             iconColor={'white'}
-            bodyText={'6:00:07 a.m'}
+            bodyText={moment(sunrise).format('h:ss:mm a')}
             bodyTextStyle={styles.sunText}
           />
             <IconText
             iconName={'sunset'}
             iconColor={'white'}
-            bodyText={'17:27:00 p.m'}
+            bodyText={moment(sunset).format('h:ss:mm a')}
             bodyTextStyle={styles.sunText}
           />
         </View>

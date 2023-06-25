@@ -3,24 +3,26 @@ import {View, SafeAreaView, Text, StyleSheet} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import RowText from '../components/RowText';
 import {WeatherType} from '../utilities/WeatherType'
-const CurrentWeather = () => {
+const CurrentWeather = ({weatherData}) => {
+  const {main:{temp, feels_like, temp_max,temp_min}, weather} = weatherData
+  const weatherCondition = weather[0].main
   return (
-    <SafeAreaView style={styles.wrapper}>
+    <SafeAreaView style={[styles.wrapper, {backgroundColor: WeatherType[weatherCondition].backgroundColor}]}>
       <View style={styles.container}>
-        <Feather name="sun" size={100} color="black" />
-        <Text style={styles.temp}>25 C</Text>
-        <Text style={styles.feelsLike}>Feels: 24 C</Text>
+        <Feather name={WeatherType[weatherCondition]?.icon} size={100} color="white" />
+        <Text style={styles.temp}>{temp}</Text>
+        <Text style={styles.feelsLike}>{`Feels like ${feels_like}°`}C</Text>
         <RowText
-          bodyTextOne={'high:42'}
-          bodyTextTwo={'low:35'}
+          bodyTextOne={`High: ${temp_max}° `}
+          bodyTextTwo={`Low: ${temp_min}° `}
           bodyStyleOne={styles.highLow}
           bodyStyleTwo={styles.highLow}
           bodyStyleWrapper={styles.highLowWrapper}
         />
       </View>
       <RowText
-        bodyTextOne={"It's Damn Sunny"}
-        bodyTextTwo={WeatherType['ThunderStorm'].message}
+        bodyTextOne={weather[0].description}
+        bodyTextTwo={WeatherType[weatherCondition]?.message}
         bodyStyleOne={styles.description}
         bodyStyleTwo={styles.message}
         bodyStyleWrapper={styles.bodyWrapper}
@@ -31,7 +33,6 @@ const CurrentWeather = () => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: 'pink',
     flex: 1,
   },
   container: {
@@ -52,11 +53,11 @@ const styles = StyleSheet.create({
     fontSize: 27,
   },
   description: {
-    fontSize: 48,
+    fontSize: 43,
     color: 'black',
   },
   message: {
-    fontSize: 30,
+    fontSize: 25,
     color: 'black',
   },
   bodyWrapper: {
