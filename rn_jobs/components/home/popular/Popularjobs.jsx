@@ -12,7 +12,6 @@ const Popularjobs = () => {
     num_pages:'1'
   });
 
-  // console.log(data);
   const router=useRouter();
   const isLoading =false;
   const errors = false
@@ -28,7 +27,7 @@ const Popularjobs = () => {
         {isLoading ? <ActivityIndicator size={SIZES.large} color={COLORS.primary} />
         : errors ? <Text>Something is wrong</Text>
         : <FlatList
-        data={[1,2,3,5,6,7,8,9,10]}
+        data={data}
         renderItem={({item})=>(
           <PopularJobCard item={item} />
         )}
