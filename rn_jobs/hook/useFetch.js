@@ -5,19 +5,20 @@ const useFetch=(endpoint,query)=>{
 const [data,setData] = useState([]);
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
-
+console.log("inUseFetch", endpoint, " Query: ", query)
 const options = {
     method: 'GET',
     url: `https://jsearch.p.rapidapi.com/${endpoint}`,
     params: {...query},
     headers: {
-      'X-RapidAPI-Key': "4cd03a74ecmsh4f3ff5062126671p13544ajsn5e61dfc00dc",
+      'X-RapidAPI-Key': "4cd03a74ecmsh4f3ff5062126671p13544ajsn5e61dfc00dcd",
       'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
     }
   };
   const fetchData = async()=>{
     setLoading(true);
     try{
+       console.log("HEAFER: ", options.headers)
         const response = await axios.request(options);
         setData(response.data.data);
         setLoading(false)
@@ -30,6 +31,7 @@ const options = {
   }
 
   useEffect(()=>{
+    console.log("IN RFECTHS")
     fetchData();
   },[]);
 
@@ -37,7 +39,7 @@ const options = {
     setLoading(true);
     fetchData();
   }
-
+// console.log("DATATA: ", data)
 return {loading, error, data, refetch};
 }
 
