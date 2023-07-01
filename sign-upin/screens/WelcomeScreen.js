@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 export default function WelcomeScreen() {
     const navigation = useNavigation();
   return (
-    <SafeAreaView className="flex-1" style={{backgroundColor:"#877dfa"}}>
+    <SafeAreaView className="flex-1" style={{backgroundColor:"#002D71"}}>
         <View className="flex-1 flex justify-around my-4"> 
             <Text className="text-white font-bold text-4xl text-center">Lets get started</Text>
         
